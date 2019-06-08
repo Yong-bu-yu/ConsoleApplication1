@@ -92,13 +92,13 @@ namespace 实验
             Console.WriteLine("Contains 3:{0}", myI16.Contains(3));
             Console.WriteLine("2 is at index {0}.", myI16.IndexOf(2));
             Console.WriteLine();
-         //   myI16.Insert(3, (Int16)13);
+            myI16.Insert(3, (Int16)13);
             Console.WriteLine("Contents of the collection after inserting at index 3:");
             PrintIndexAndValues(myI16);
-        //    myI16[4] = 123;
+            myI16[4] = 123;
             Console.WriteLine("Contents of the collection after setting the element at index 4 to 123:");
             PrintIndexAndValues(myI16);
-        //    myI16.Remove((Int16)2);
+            myI16.Remove((Int16)2);
             Console.WriteLine("Contents of the collection after removing the element 2:");
             for (int i = 0; i < myI16.Count; i++)
                 Console.WriteLine(" [{0}]: {1}", myI16[i]);
