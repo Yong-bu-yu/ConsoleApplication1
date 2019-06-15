@@ -1,4 +1,4 @@
-﻿'visual Basic
+'visual Basic
 Option Explicit On
 Option Strict On
 Imports System
