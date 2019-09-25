@@ -1,0 +1,45 @@
+using System;
+using System.Runtime.Remoting;
+namespace 实验
+{
+    class Program//Program=Announcer
+    {
+        class InfoCenter
+        {
+            public void Broadcasting(string msg)
+            {
+                Console.WriteLine(msg);
+            }
+        }
+        InfoCenter infoCenter;
+        public void Run()
+        {
+            //假设Announcer的配置文件已经存在，并被调用
+            RemotingConfiguration.Configure("Announcer.exe.config");
+            infoCenter = new InfoCenter();
+            //创建一个定时器实例
+            System.Timers.Timer timer = new System.Timers.Timer(1000);
+            //每隔1秒钟调用一次timer_Elapsed方法
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(this.timer_Elapsed);
+            timer.Enabled = true;
+        }
+        private void timer_Elapsed(object sender,System.Timers.ElapsedEventArgs e)
+        {
+            //定义返回当前时间的字符串
+            string msg = "The Time is: " + DateTime.Now.ToString();
+            Console.WriteLine("Send Message:" + msg);
+            //由infoCenter实例广播信息
+            infoCenter.Broadcasting(msg);
+        }
+        public static void Main(string[] args)
+        {
+            //创建一个Announcer实例
+            Program program = new Program();
+            //运行Announcer这个实例
+            program.Run();
+            Console.WriteLine("The announcer has been started.");
+            //从标准设置上读取一行信息
+            Console.WriteLine();
+        }
+    }
+}
