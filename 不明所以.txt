@@ -1,0 +1,19 @@
+public interface ISynchronizeInvoke
+{
+  object Invoke(Delegate method,object[] args);
+  IAsyncResult BeginInvoke(Delegate method,object[] args);
+  object EndInvoke(IAsyncResult result);
+  bool InvokeRequired {get;}
+}
+    比如，假设你想要从另一个线程中调用某个form中的Close方法，那么你可以使用预先定义好的MethodInvoker代
+理，并调用Invoke方法：
+Form form;
+/*获得一个指向form对象的引用*/
+ISynchronizeInvoke synchronizer;
+synchronizer = form;
+if(synchronizer.InvokeRequired)
+{
+  MethodInvoKer invoker = new MethodInvoker(form.Close);
+  synchronizer.Invoke(invoker,null);
+}
+else form.Close();
