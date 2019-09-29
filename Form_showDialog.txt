@@ -1,0 +1,28 @@
+//调用构造函数，创建一个新form实例
+            Form form1 = new Form();
+            //创建两个按钮实例，分别为accept和cancel
+            Button button1 = new Button();
+            Button button2 = new Button();
+            button1.Text = "OK";
+            button2.Text = "Cancel";
+            //设置按钮出现的位置
+            button1.Location = new System.Drawing.Point(10, 10);
+            //在第一个按键的位置基础上设置第二个按钮的位置
+            button2.Location = new System.Drawing.Point(button1.Left, button1.Height + button1.Top + 10);
+            //设置Form标题栏
+            form1.Text = "My Dialog Box";
+            //定义Form边框的风格为对话框
+            form1.FormBorderStyle = FormBorderStyle.FixedDialog;
+            //设置右上角的按钮
+            form1.MaximizeBox = false;
+            form1.MinimizeBox = false;
+            //设置accpet按钮和cancle按钮
+            form1.AcceptButton = button1;
+            form1.CancelButton = button2;
+            //Form出现在屏幕中央
+            form1.StartPosition = FormStartPosition.CenterScreen;
+            //加入定义的两个按钮
+            form1.Controls.Add(button1);
+            form1.Controls.Add(button2);
+            //显示Form窗口
+            form1.ShowDialog();
