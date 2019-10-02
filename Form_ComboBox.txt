@@ -1,0 +1,39 @@
+(1)双击Button1按钮，在方法
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add(textBox1.Text);
+        }
+   调用ComboBox类的Add()方法textBox1的内容添加到comboBox1中。
+(2)双击Button2按钮，在方法
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            int index = comboBox1.FindString(textBox2.Text);
+            comboBox1.SelectedIndex = index;
+        }
+   调用方法FindString()在comboBox项目中查询textBox2的内容，找到就设置comboBox1的SelectedIndex属性为该项的索引值。
+(3)双击Button3按钮，在方法
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            comboBox1.BeginUpdate();
+            for (int i = 0; i < 1000; i++)
+            {
+                comboBox1.Items.Add(i.ToString());
+            }
+            comboBox1.EndUpdate();
+        }
+   调用方法BeginUpdate()和方法EndUpdae()快速向comboBox1中添加项目。
+(4)双击Button4按钮，在方法
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedIndex = comboBox1.SelectedIndex;
+                object selectedItem = comboBox1.SelectedItem;
+                MessageBox.Show("Selected Item Text:" + selectedItem.ToString() + "\n" + "Index:" + selectedIndex.ToString());
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("下拉列表没有选项。");
+            }
+        }
+   调用方法SelectedItem()获取当前的ComboBox1的项目，然后调用信息对话框显示该项目以及在comboBox1中的索引号。
