@@ -1,0 +1,15 @@
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\thinput.exe.config
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\thinput.exe.manifest
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\thinput.application
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\thinput.exe
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\thinput.pdb
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\thinput.TrustInfo.xml
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\thinput.exe.manifest
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\thinput.application
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\thinput.exe
+D:\vsC#\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\thinput.pdb

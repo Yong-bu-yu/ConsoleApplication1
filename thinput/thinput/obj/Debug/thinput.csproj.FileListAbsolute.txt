@@ -1,0 +1,15 @@
+D:\vsC#\thinput\thinput\bin\Debug\thinput.exe.config
+D:\vsC#\thinput\thinput\bin\Debug\thinput.exe.manifest
+D:\vsC#\thinput\thinput\bin\Debug\thinput.application
+D:\vsC#\thinput\thinput\bin\Debug\thinput.exe
+D:\vsC#\thinput\thinput\bin\Debug\thinput.pdb
+D:\vsC#\thinput\thinput\obj\Debug\thinput.csprojAssemblyReference.cache
+D:\vsC#\thinput\thinput\obj\Debug\thinput.Form1.resources
+D:\vsC#\thinput\thinput\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\vsC#\thinput\thinput\obj\Debug\thinput.csproj.GenerateResource.cache
+D:\vsC#\thinput\thinput\obj\Debug\thinput.csproj.CoreCompileInputs.cache
+D:\vsC#\thinput\thinput\obj\Debug\thinput.TrustInfo.xml
+D:\vsC#\thinput\thinput\obj\Debug\thinput.exe.manifest
+D:\vsC#\thinput\thinput\obj\Debug\thinput.application
+D:\vsC#\thinput\thinput\obj\Debug\thinput.exe
+D:\vsC#\thinput\thinput\obj\Debug\thinput.pdb
