@@ -1,0 +1,19 @@
+(1)双击Button1按钮，在方法
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.SelectedText != "")
+                Clipboard.SetDataObject(textBox1.SelectedText);
+            else textBox2.Text = "No text selected in textBox1";
+        }
+   调用SetDataObject()方法把textBOx1的内容复制到Clipboard上。
+(2)双击Button2按钮，在方法
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            IDataObject iData = Clipboard.GetDataObject();
+            //判断Clipboard上的数据的格式是否可用
+            if (iData.GetDataPresent(DataFormats.Text))
+                //如果可用，就在textBox2上显示这个内容
+                textBox2.Text = (String)iData.GetData(DataFormats.Text);
+            else textBox2.Text = "Could not retrieve data off the clipboard.";
+        }
+   
