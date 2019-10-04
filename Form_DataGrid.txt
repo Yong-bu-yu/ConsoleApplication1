@@ -1,0 +1,32 @@
+        源代码如下：
+        private void EditGrid(DataGrid myGrid)
+        {
+            //通过当前的单元格，获得被选定的行和列
+            int colNum;
+            int rowNum;
+            colNum = dataGrid1.CurrentCell.ColumnNumber;
+            rowNum = dataGrid1.CurrentCell.RowNumber;
+            DataGridColumnStyle dgCol;
+            dgCol = dataGrid1.TableStyles[0].GridColumnStyles[colNum];
+            //如果能够开始编辑，就调用方法BeginEdit
+            if(dataGrid1.BeginEdit(dgCol,rowNum))
+            {
+                //获取DataTable选定行，编辑行值
+                DataTable myTable;
+                DataRow myRow;
+                //把DataGrid绑定行，编辑行值
+                myTable = (DataTable)dataGrid1.DataSource;
+                myRow = myTable.Rows[rowNum];
+                //调用Row对象的编辑方法
+                myRow.BeginEdit();
+                myRow[colNum] = "New Value";
+                //接受对DataRow和DataTable的改变
+                myRow.AcceptChanges();
+                myTable.AcceptChanges();
+                dataGrid1.EndEdit(dgCol, rowNum, false);
+            }
+            else
+            {
+              Console.WriteLine("BeginEdit failed");
+            }
+        }
