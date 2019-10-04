@@ -1,0 +1,22 @@
+源代码如下：
+private void AddCustomDataTableStyle()
+{
+  DataGridTableStyle tsl=new DataGridTableStyle();
+  tsl.MappingName="Customers";
+  tsl.AlternatingBackColor=Color.LightGray;
+  //加入一个DataGridColumnStyle类型的列。
+  DataGridColumnStyle boolCol=new DataGridBoolColumn();
+  boolCol.MappingName="Current";
+  boolCol.HeaderText="IsCurrent Customer";
+  boolCol.Width=150;
+  tsl.GridColumnStyles.Add(boolCol);
+  //添加第二个DataGridColumnStyle对象
+  DataGridColumnStyle TextCol=new DataGridTextBoxColumn();
+  TextCol.MappingName="custNmae";
+  TextCol.HeaderText="Customer Name";
+  TextCol.Width=250;
+  tsl.GridColumnStyles.Add(TextCol);
+  myDataGrid.TableStyles.Add(tsl);
+  //设置属性TableasAlreadyAdded为true防止这个增加过程再次发生
+  TablesAlreadyAdded=true;
+}
