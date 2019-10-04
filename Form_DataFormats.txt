@@ -1,0 +1,46 @@
+        源代码如下：
+        
+        public class MyNewObject: object
+        {
+            private string myValue;
+            //创建一个默认的类的构造方法
+            public MyNewObject()
+            {
+                myValue = "This is the value of the class";
+            }
+            //创建一个检索或者设置属性值的方法
+            public string MyObjectVale
+            {
+                get { return myValue; }
+                set { myValue = value; }
+            }
+        }
+        
+        
+        把下面的代码作为Form1类的方法添加：
+        public void MyClipboarMethod()
+        {
+            DataFormats.Format myFormat = DataFormats.GetFormat("myFormat");
+            //创建一个MyNewObject对象，利用myFormat实例存储它
+            MyNewObject myObject = new MyNewObject();
+            DataObject myDataObject = new DataObject(myFormat.Name, myObject);
+            //复制到myObject到剪贴板上
+            Clipboard.SetDataObject(myDataObject);
+            //由剪贴板获取数据，并按照IdataObject类型转换数据
+            IDataObject myRetrievedObject = Clipboard.GetDataObject();
+            MyNewObject myDereferencedObject = (MyNewObject)myRetrievedObject.GetData(myFormat.Name);
+            //在textBox中输出这些数据
+            textBox1.Text = myDereferencedObject.MyObjectVale;
+        }
+        
+        private void GetMyFormatInfomation()
+        {
+            //创建一个DataFormats对象，定义数据格式是Unicode
+            DataFormats.Format myFormat = DataFormats.GetFormat(DataFormats.UnicodeText);
+            textBox1.Text = "ID value:" + myFormat.Id + "\n" + "Format name:" + myFormat.Name;
+        }
+        
+        这两个方法显示如何检索表示一对格式名和ID的DataFormats.Format，请求了UnicodeText格式，并且检索到的
+    DataFormats.Format对象的内容会显示在一个文本框中。此代码假定已经实例化textBox1。
+        最后，我们在Form1类的构造函数中添加：
+        GetMyFormatInfomation();        
