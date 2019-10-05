@@ -1,0 +1,15 @@
+源代码如下：
+private void AddMyData()
+  {
+    //创建一个DataObject类的存储组件对象
+    component myComponent=new Component();
+    DataObject myDataObject=new DataObject();
+    //把这个组件添加到DataObject中
+    myDataObject.SetData(myComponent);
+    //在这个DataObject对象中查找一个类型的数据
+    TypemType=myComponent.GetType();
+    if(myDataObject.GetDataPresent(myType);
+      textBox1.Text="Data ofType"+myType.ToString()+" is present in the DataObject";
+    else
+      textBox1.Text="Data ofType"+myType.ToString()+" is not present in the DataObject";
+  }
