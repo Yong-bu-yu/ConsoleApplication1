@@ -1,0 +1,25 @@
+public void CreateMyMenu()
+        {
+            //设置top-level菜单项目
+            menuItem1.Text = "Edit";
+            //设置第一级子菜单的标题
+            menuItem2.Text = "Font Size";
+            //设置menuItem2菜单 的第一个子菜单标题
+            menuItem3.Text = "Small";
+            //设置这个菜单项的Checked属性值为true
+            menuItem3.Checked = true;
+            //定义与这个菜单项相关的快捷键
+            menuItem3.Shortcut= Shortcut.CtrlS;
+            //设置第二个子菜单项
+            menuItem4.Text = "Large";
+            menuItem4.Shortcut= Shortcut.CtrlL;
+            //设置子菜单项的索引
+            menuItem4.Index = 1;
+            //增加menuItem3和menuItem4到menuItem2
+            menuItem2.MenuItems.Add(menuItem3);
+            menuItem2.MenuItems.Add(menuItem4);
+            //增加menuItem2到menuItem1;
+            menuItem1.MenuItems.Add(menuItem2);
+            //增加menuItem1到MainMenu
+            mainMenu1.MenuItems.Add(menuItem1);
+        }
