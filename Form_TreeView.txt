@@ -1,0 +1,16 @@
+
+            //首先判断是否选定组件中的位置
+            if (treeView1.SelectedNode == null)
+            {
+                MessageBox.Show("请选择一个节点", "提示信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                //创建一个节点对象，并初始化
+                TreeNode tmp;
+                tmp = new TreeNode("节点名称");
+                //在TreeView组件中加入子节点
+                treeView1.SelectedNode.Nodes.Add(tmp);
+                treeView1.SelectedNode = tmp;
+                treeView1.ExpandAll();
+            }
