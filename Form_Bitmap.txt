@@ -1,0 +1,6 @@
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Bitmap im = new Bitmap("E:\\未标题3.png");
+            e.Graphics.DrawImage(im, 0, 0, im.Width, im.Height);
+            base.OnPaint(e);
+        }
