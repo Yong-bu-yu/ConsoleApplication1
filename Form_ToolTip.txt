@@ -1,0 +1,15 @@
+        源代码如下：
+        public void CreateMyToolTip()
+        {
+            //创建与Form容器相关联的ToolTip对象
+            ToolTip toolTip1 = new ToolTip();
+            //设置ToolTip对象出现的延迟时间
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.InitialDelay = 1000;
+            toolTip1.ReshowDelay = 500;
+            //无论Form是否处于活动状态都显示ToolTip文本
+            toolTip1.ShowAlways = true;
+            //为Button和Checkbox对象建立ToolTip文本
+            toolTip1.SetToolTip(this.button1, "My button1");
+            toolTip1.SetToolTip(this.checkBox1, "My checkBox1");
+        }
