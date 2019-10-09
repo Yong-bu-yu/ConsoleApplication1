@@ -1,0 +1,19 @@
+using System.Windows.Forms;
+public class MyWinApp:Form
+{
+  public static void Main()
+  {
+    MyWinApp form = new MyWinApp();
+    Application.Run(form);
+  }
+}
+
+private void InitializeComponent()
+{
+  this.Text = "My Windows Application";
+  //设置窗口的图标
+  this.Icon = new Icon(imageFolder + "applicationLogo.ico");
+  this.Width = 400;
+  this.Height = 300;
+  this.StartPosition = FormStartPosition.CenterScreen;
+}
