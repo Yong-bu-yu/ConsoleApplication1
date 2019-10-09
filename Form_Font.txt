@@ -1,0 +1,11 @@
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        private static extern IntPtr GetStockObject(int fnObject);
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            //Get a handle for a GDI font
+            IntPtr hFont = GetStockObject(0);
+            //Create a Font object form hFont.
+            Font hfontFont = Font.FromHfont(hFont);
+            //Use hfontFont to drew text to the screen
+            e.Graphics.DrawString("\n这些汉字是由 GDI HFONT 定义输出的", hfontFont, Brushes.Black, 0, 0);
+        }
