@@ -1,0 +1,17 @@
+        源代码如下：
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            //定义一个字体对象数组
+            FontFamily[] families = FontFamily.Families;
+            Font familiesFont;
+            string familyString;
+            float spacing = 0;
+            //输出由字体数组中的元素所定义的字符串
+            foreach (FontFamily family in families)
+            {
+                familiesFont = new Font(family, 15, FontStyle.Italic);
+                familyString = "This is the " + family.Name + "family.";
+                e.Graphics.DrawString(familyString, familiesFont, Brushes.DeepPink, new PointF(0, spacing));
+                spacing += familiesFont.Height;
+            }
+        }
