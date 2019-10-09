@@ -1,0 +1,11 @@
+        public bool ThumbnailCallback()
+        {
+            return false;
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Image.GetThumbnailImageAbort myCallback = new Image.GetThumbnailImageAbort(ThumbnailCallback);
+            Bitmap myBitmap = new Bitmap("E:\\未标题2.png");
+            Image myThumbnail = myBitmap.GetThumbnailImage(myBitmap.Width, myBitmap.Height, myCallback, IntPtr.Zero);
+            e.Graphics.DrawImage(myThumbnail, 45, 45);
+        }
