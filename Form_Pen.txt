@@ -1,0 +1,9 @@
+        源代码如下：
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Pen blackPen = new Pen(Color.Blue, 10);
+            //建立椭圆的位置，宽度和高度
+            float x = 40F, y = 20F, width = 400F, height = 100F;
+            //在屏幕上显示椭圆
+            e.Graphics.DrawEllipse(blackPen, x, y, width, height);
+        }
