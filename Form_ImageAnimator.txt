@@ -1,0 +1,25 @@
+        源代码如下：
+        Bitmap animatedImage = new Bitmap("1.gif");
+        bool currentlyAnimating = false;
+        public void AnimateImage()
+        {
+            if (!currentlyAnimating)
+            {
+                //仅开始一次animation
+                ImageAnimator.Animate(animatedImage, new EventHandler(this.OnFrameChanged));
+                currentlyAnimating = true;
+            }
+        }
+        private void OnFrameChanged(object o,EventArgs e)
+        {
+            this.Invalidate();
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            AnimateImage();
+            //获取下一个帧
+            ImageAnimator.UpdateFrames();
+            //输出下一个帧
+            e.Graphics.DrawImage(this.animatedImage, new Point(0, 0));
+        }
+        //this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw |ControlStyles.AllPaintingInWmPaint, true);解决动图闪烁问题，当然方法不止一个
