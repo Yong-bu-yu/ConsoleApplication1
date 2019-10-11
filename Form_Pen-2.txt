@@ -1,0 +1,9 @@
+        源代码如下：
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Pen rotatePen = new Pen(Color.Black, 15);
+            e.Graphics.DrawRectangle(rotatePen, 20, 10, 200, 100);
+            rotatePen.ScaleTransform(2, 1); 
+            rotatePen.RotateTransform(90);
+            e.Graphics.DrawRectangle(rotatePen, 340, 10, 200, 100);
+        }
