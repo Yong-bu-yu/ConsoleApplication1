@@ -1,0 +1,10 @@
+public static void AddRelations(DataSet myDataSet)
+{
+  //建立第一个数据关系
+  DataRelation r1 = new DataRelation("CustomerOrders",myDataSet.Tables["Customers"].Columns["customerId"],myDataSet.Tables["Orders"].Columns["customerId"]);
+  //建立第二个数据关系
+  DataRelation r2 = new DataRelation("OrderDetail",myDataSet.Tables["Orders"].Columns["orderId"],myDataSet.Tables["OrderDetails"].Columns["orderId"]);
+  myDataSet.Relations.AddRange( new DataRelation[] {r1, r2});
+  foreach (DataRelation r in myDataSet.Relations)
+    Console.WriteLine(r.RelationName);
+}
