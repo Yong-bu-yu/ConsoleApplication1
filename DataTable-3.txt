@@ -1,0 +1,17 @@
+        private void ShowRows()
+        {
+            DataTable myTable = MakeNamesTable();
+            DataRowCollection rc;
+            DataRow myNewRow;
+            object[] rowVals = new object[2];
+            rc = myTable.Rows;
+            rowVals[0] = 30;
+            rowVals[1] = "world";
+            myNewRow = rc.Add(rowVals);
+            rowVals[0] = 40;
+            rowVals[1] = "Earth";
+            myNewRow = rc.Add(rowVals);
+            Console.WriteLine("共有" + myTable.Rows.Count + "条记录");
+            foreach (DataRow row in myTable.Rows)
+                Console.WriteLine("Id is: {0}\tName is: {1}", row[0], row[1]);
+        }
