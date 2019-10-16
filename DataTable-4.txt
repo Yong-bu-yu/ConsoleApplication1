@@ -1,0 +1,29 @@
+        private void DemonstrateRowVersions()
+        {
+            DataTable myTable = new DataTable("myTable");
+            DataColumn col1 = new DataColumn("col1");
+            col1.DataType = Type.GetType("System.String");
+            col1.DefaultValue = "myDeaultValue";
+            DataColumn col2 = new DataColumn("col2");
+            col2.DataType = Type.GetType("System.Decimal");
+            col2.DefaultValue = .1;
+            myTable.Columns.Add(col1);
+            myTable.Columns.Add(col2);
+            DataRow newRow;
+            newRow = myTable.NewRow();
+            newRow[col1] = "Nitrogen";
+            newRow[col2] = 33;
+            myTable.Rows.Add(newRow);
+            myTable.AcceptChanges();
+            PrintRowVersion(myTable, DataRowVersion.Current);
+            ......
+        }
+        private void PrintRowVersion(DataTable dt,DataRowVersion ver)
+        {
+            Console.WriteLine("\n" + ver.ToString() + "Version:");
+            foreach (DataRow row in dt.Rows)
+            {
+                Console.WriteLine(row[0, ver] + ",");
+                Console.WriteLine(row[1, ver] + "\n");
+            }
+        }
