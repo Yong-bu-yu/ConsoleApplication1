@@ -1,0 +1,40 @@
+public class DataGridSample:Form
+{
+  DataSet ds;
+  void InitializeComponent()
+  {
+    //由VS.net自动产生的代码，略
+    ConnectToData();
+    myGrid.SetDataBinding(ds, "Suppliers");
+  }
+  void ConnectToData()
+  {
+    string cString = "user id=sa;" + "password=;" + "initial catalog=northwid;" + "data source=MyComputerName\\NetSDK;" + "Connect Timeout=5";
+    SqlConnection myConnection = new Sqlconnection(cString);
+    //创建一个SqlDataAdapter对象
+    SqlDataAdapter myAdapter = new SqlDataAdapter();
+    myAdapter.TableMappings.Add("Table", "Suppliers");
+    myConnection.Open();
+    SqlCommand myCommand = new SqlCommand("Select * FROW Suppliers", myConnection);
+    myCommand.CommandType = CommandType.Text;
+    myAdapter.SelectCommand = myCommand;
+    Console.WriteLine("The connection is open");
+    ds = new DataSet("Customers");
+    myAdapter.Fill(ds);
+    //创建第二个Adapter对象以及SqlCommand
+    SqlDataAdapter adpProducts = new SqlDataAdapter();
+    adpProducts.TableMappings = new SqlCommand("Select * FROW Products", myConnection);
+    adpProducts.SelectCommand = cmdProducts;
+    adpProducts.Fill(ds);
+    myConnection.Close();
+    Console.WriteLine("The Connection is closed.");
+    System.Data.DataRelation dr;
+    System.Data.DataRelation dc1;
+    System.Data.DataRelation dc2;
+    //获得parent和child这两个表的columns
+    dc1 = ds.Tables["Suppliers"].Columns["SuppLierID"];
+    dc2 = ds.Tables["Products"].Columns["SupplierID"];
+    dr = new System.Data.DataRelation("suppliers2products", dc1, dc2);
+    ds.Relations.Add(dr);
+  }
+}
