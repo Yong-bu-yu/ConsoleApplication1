@@ -1,0 +1,32 @@
+        public DataTableDemo()
+        {
+            InitializeComponent();
+            MakeParentTable();
+            dataGrid1.SetDataBinding(myDataSet, "ParentTable"); 
+        }        
+        private void MakeParentTable()
+        {
+            DataTable myDataTable = new DataTable("ParentTable");
+            DataColumn myDataColumn;
+            DataRow myDataRow;
+            //创建DataColumn对象，设置DataType，ColumnName等属性并添加到DataTable
+            myDataColumn = new DataColumn();
+            myDataColumn.DataType = Type.GetType("System.Int32");
+            myDataColumn.ColumnName = "id";
+            myDataColumn.AutoIncrement = true;
+            myDataColumn.Caption = "ParentItem";
+            myDataColumn.ReadOnly = true;
+            myDataColumn.Unique = true;
+            myDataTable.Columns.Add(myDataColumn);
+            //此处可以添加多个列对象，初始化一个DataSet对象来操作myDataTable对象
+            myDataSet = new DataSet();
+            myDataSet.Tables.Add(myDataTable);
+            //创建三个DataRow对象并把它们添加到DataTable
+            for (int i = 0; i <=2; i++)
+            {
+                myDataRow = myDataTable.NewRow();
+                myDataRow["id"] = i;
+                    myDataRow["ParentItem"] = "ParentItem" + i;
+                myDataTable.Rows.Add(myDataRow);
+            }
+        }
