@@ -1,0 +1,36 @@
+
+        private void DemonstrateDataView()
+        {
+            DataTable myTable = new DataTable("myTable");
+            DataColumn colItem = new DataColumn("item", Type.GetType("System.String"));
+            myTable.Columns.Add(colItem);
+            DataRow NewRow;
+            //向数据表中加入5行新数据
+            for (int i = 0; i < 5; i++)
+            {
+                NewRow = myTable.NewRow();
+                NewRow["item"] = "Item" + i;
+                myTable.Rows.Add(NewRow);
+            }
+            myTable.Rows[0]["Item"] = "cat";
+            myTable.Rows[1]["Item"] = "dog";
+            myTable.AcceptChanges();
+            //创建DataView对象
+            DataView firstView = new DataView(myTable);
+            DataView secondView = new DataView(myTable);
+            DataRowView myDataRowView;
+            myDataRowView = firstView.AddNew();
+            myDataRowView = secondView.AddNew();
+            myDataRowView["item"] = "fish";
+            firstView.RowStateFilter = DataViewRowState.ModifiedCurrent | DataViewRowState.Added;
+        //    PrintTableOrView(firstView, "Crrent Ualues in Table\n");
+            PrintTableOrView(secondView, "Second DataView:ModifiedCurrent|Added\n");
+        }
+        private void PrintTableOrView(DataView dv,string label)
+        {
+            richTextBox1.AppendText(label);
+            for (int i = 0; i < dv.Count; i++)
+            {
+                richTextBox1.Text += " " + dv[i]["item"];
+            }
+        }
