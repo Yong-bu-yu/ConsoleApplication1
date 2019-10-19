@@ -1,0 +1,32 @@
+        public Class1()
+        {
+            //创建数据源
+            myDataSet = new DataSet();
+            MakeParentTable();
+            this.CreateTable(this.myDataSet);
+            this.GetTables(this.myDataSet);
+        }        
+        private void GetTables(DataSet ds)
+        {
+            foreach (DataTable t in ds.Tables)
+            {
+                //输出数据集中每个表的名称
+                Console.WriteLine("Each DataTable's Name in the DataTableCollection is:" + t.TableName + "\nIt's content is following:");
+                foreach (DataColumn c in t.Columns)
+                {
+                    foreach(DataRow r in t.Rows)
+                    {
+                    if(r[c]!=null)
+                        Console.Write(" "+r[c]);
+                    Console.WriteLine();
+                    }
+                }
+            }
+        }
+        private void CreateTable(DataSet ds)
+        {
+            DataTable newTable = new DataTable("MyTable");
+            newTable.Columns.Add("ID", typeof(int));
+            newTable.Columns.Add("Name", typeof(string));
+            ds.Tables.Add(newTable);
+        }
