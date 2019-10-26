@@ -1,0 +1,10 @@
+public static void Main()
+{
+  建立一个服务器注册的连接对象
+  ChannelServices.RegisterChannel(new TcpChannel());
+  ActivatedClientTypeEntry myActivatedClientTypeEntry = new ActivatedClientTypeEntry(typeof(HelloServer),"tcp://localhost:8082");
+  RemotingConfiguration.RegisterActivatedClientType(myActivatedClientTypeEntry);
+  HelloServer myHelloServer = new HelloServer("ParameterString");
+  Console.WriteLine("Object type of client activated object: "+myActivatedClientTypeEntry.ObjectType.ToString());
+  Console.WriteLine("Application url where the type is activated: "+myActivatedClientTypeEntry.ApplicationUrl);
+}
