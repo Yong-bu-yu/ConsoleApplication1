@@ -1,0 +1,15 @@
+public class MyClient{
+  public static void Main()
+  {
+    //注册一个端口号为8082的TcpChannel
+    ChannelServices.RegisterChannel(new TcpChannel(8082));
+    ActivatedServiceTypeEntry myActivatedServiceTypeEntry = new ActivatedSericeTypeEntry(typeof(HelloServer));
+    //远程配置这个已经注册的服务类型
+    RemotingConfiguration.RegisterActivatedServiceType(myActivatedServiceTypeEntry);
+    ActivatedServiceTypeEntry[] myActivatedServiceEntries = RemotingConfiguration.GetRegisteredActivatedServiceTypes();
+    Console.WriteLine("Information of first registered activated service type :");
+    Console.WriteLine("Object type: "+myActivatedServiceEntries[0].ToString());
+    Console.WriteLine("Press enter to stop this process");
+    Console.WriteLine();
+  }
+}
