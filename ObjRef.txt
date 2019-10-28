@@ -1,0 +1,41 @@
+    //定义一个空的私有的构造函数
+    public class MyObjRef:ObjRef
+    {
+        private MyObjRef() { }
+        //定义一个公共的构造函数
+        public MyObjRef(MarshalByRefObject o,Type t):base(o,t)
+        {
+            Console.WriteLine("Created MyObjRef.");
+        }
+        public MyObjRef(SerializableAttribute i,StreamingContext c)
+        {
+            Console.WriteLine("Deserialized MyObjRef.");
+        }
+        //超越基类的方法
+        public override void GetObjectData(SerializationInfo s, StreamingContext c)
+        {
+            base.GetObjectData(s, c);
+            s.SetType(GetType());
+            Console.WriteLine("Serialized MyObjRef.");
+        }
+        public override object GetRealObject(StreamingContext context)
+        {
+            if (IsFromThisAppDomain()||IsFromThisProcess())
+            {
+                Console.WriteLine("Returning actual object referenced by MyObjRef.");
+                return base.GetRealObject(context);
+            }
+            else
+            {
+                Console.WriteLine("Returning proxy to remote object.");
+                return RemotingServices.Unmarshal(this);
+            }
+        }
+        public class LocalObject:MarshalByRefObject
+        {
+            public override ObjRef CreateObjRef(Type t)
+            {
+                return new MyObjRef(this, t);
+            }
+        }
+    }
