@@ -1,0 +1,13 @@
+
+            //创建一个注册的服务通道
+            ChannelServices.RegisterChannel(new HttpChannel());
+            Console.WriteLine(" Start calling from Client One......");
+            //创建一个WellKnownKnownClientTypeEntry实例
+            WellKnownClientTypeEntry myWellKnownClientTypeEntry = new WellKnownClientTypeEntry(typeof(HelloServer,"http://localhost:8086/SayHello"));
+            RemotingConfiguration.RegisterWellKnownClientType(myWellKnownClientTypeEntry);
+            HelloServer myHelloServerObject = new HelloServer();
+            WellKnownClientTypeEntry[]myWellKnownClientTypeEntryCollection = RemotingConfiguration.GetRegisteredWellKnownClientTypes();
+            Console.WriteLine("The Application Uri to activate the Remote Object :"+myWellKnownClientTypeEntryCollection[0].ApplicationUrl);
+            Console.WriteLine("The 'WellKnownClientTypeEntry' object :"+myWellKnownClientTypeEntryCollection[0].ToString());
+            for(int i=0;i<5;i++)
+                Console.WriteLine(myHelloServerObject.HelloMethod(" Client one"));
