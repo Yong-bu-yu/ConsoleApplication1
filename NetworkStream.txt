@@ -1,0 +1,31 @@
+
+            myNetworkStream = new NetworkStream(mySocket);
+            //判断网络流是否可写
+            if(myNetworkStream.CanWrite)
+            {
+                byte[] myWriteBufter = Encoding.ASCII.GetBytes("Are you receiving this message?");
+                //向网络流中写入字符串信息
+                myNetworkStream.Write(myWriteBufter, 0, myWriteBufter.Length);
+                if (myNetworkStream.CanRead)
+                {
+                    //网络流是否可读
+                    byte[] myReadBuffer = new Byte[1024];
+                    string myCompleteMessage = "";
+                    int numberOfBytesRead = 0;
+                    //读出网络流中所有数据
+                    while (myNetworkStream.DataAvailable)
+                    {
+                        numberOfBytesRead = myNetworkStream.Read(myReadBuffer, 0, myReadBuffer.Length);
+                        myCompleteMessage = string.Concat(myCompleteMessage, Encoding.ASCII.GetString(myReadBuffer, 0, numberOfBytesRead));
+                    }
+                    Console.WriteLine("You received the message : " + myCompleteMessage);
+                }
+                else
+                {
+                    Console.WriteLine("Sorry. You cannot read from this NetworkStream.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Sorry. You cannot write to this NetworkStream.");
+            }
