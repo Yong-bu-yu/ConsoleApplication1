@@ -1,0 +1,11 @@
+TcpChannel channel = new TcpChannel(9000);
+ChannelServices.RegisterChannel(channel);
+SampleWellKnown objectWellKnown = new SampleWellKnown();
+ObjRef objrefWellKnown = RemotingServices.Marshal(objectWellKnown, "objectWellKnownUri");
+//输出对象的URI
+Console.WriteLine("An instance of SaamplWellKnown type is published at {0}.",objrefWellKnown.URI);
+Console.WriteLine("Press enter to unregister SampleWellKnown, so that it is no longer available on this channel.");
+Console.ReadLine();
+RemotingServices.Disonnect(objectWellKnown);
+Console.WriteLine("Press enter to end the server process.");
+Console.ReadLine();
