@@ -1,0 +1,37 @@
+
+        public string DoSocketGet(string server)
+        {
+            Encoding ASCII = Encoding.ASCII;
+            //定义一个字符串进行ASCII编码
+            string Get = "GET / HTTP/1/1\r\nHost: " + server + "\r\nConnection: Close\r\n\r\n"; 
+            //将Get字符串进行ASCII编码
+            byte[] ByteGet = ASCII.GetBytes(Get);
+            byte[] RecvBytes = new byte[256];
+            string strRetPage = null;
+            //获取服务器IP地址对象
+            IPAddress hostadd = Dns.GetHostEntry(server).AddressList[0];
+            //获取客户机IP地址对象
+            IPEndPoint EPhost = new IPEndPoint(hostadd, 80);
+            //在客户机和服务器之间建立Socket
+            Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //建立Socket连接
+            s.Connect(EPhost);
+            //测试连接是否成功
+            if(!s.Connected)
+            {
+                strRetPage = "Unable to connect to host";
+                return strRetPage;
+            }
+            //向网络连接发送编码后的字符串
+            s.Send(ByteGet, ByteGet.Length, SocketFlags.None);
+            Int32 bytes = s.Receive(RecvBytes, RecvBytes.Length, 0);
+            strRetPage = "Default HTML page on " + server + ":\r\n";
+            strRetPage = strRetPage + ASCII.GetString(RecvBytes, 0, bytes);
+            //获取所发送的字符串，并进行解码
+            while (bytes>0)
+            {
+                bytes = s.Receive(RecvBytes, RecvBytes.Length, SocketFlags.None);
+                strRetPage = strRetPage + ASCII.GetString(RecvBytes, 0, bytes);
+            }
+            return strRetPage;
+        }
