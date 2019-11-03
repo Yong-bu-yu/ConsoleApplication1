@@ -1,0 +1,25 @@
+using System;
+using System.Net.Sockets;
+using System.Net;
+
+namespace 实验
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            TcpClient tcpClient = new TcpClient();
+            try
+            {
+                IPHostEntry remoteHost = Dns.GetHostEntry("www.baidu.com");
+                IPEndPoint ipendpoint = new IPEndPoint(remoteHost.AddressList[0], 80);
+                tcpClient.Connect(ipendpoint);
+                Console.WriteLine("Connection to \n{0} \nat port {1} \nhas been established successfully", ipendpoint.Address, ipendpoint.Port);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
+}
