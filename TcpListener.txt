@@ -1,0 +1,25 @@
+        static void Main(string[] args)
+        {
+            const int portNumber = 13;//在端口13处进行监听
+            TcpListener tcpListener = new TcpListener(portNumber);
+            tcpListener.Start();
+            Console.WriteLine("Waiting for a connection...");
+            try
+            {
+                //进行Tcp连接建立
+                TcpClient tcpClient = tcpListener.AcceptTcpClient();
+                Console.WriteLine("Connection accepted.");//获取tcp客户流
+                NetworkStream networkStream = tcpClient.GetStream();
+                //对字符串进行ASCII编码
+                byte[] sendBytes = Encoding.ASCII.GetBytes(responseString);
+                //向网络流输出编码后的字符串
+                networkStream.Write(sendBytes, 0, sendBytes.Length);
+                Console.WriteLine("Message Sent /> : " + responseString);
+                tcpClient.Close();
+                tcpListener.Stop();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());                
+            }
+        }
