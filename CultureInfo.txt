@@ -1,0 +1,23 @@
+using System;
+using System.Collections;
+using System.Globalization;
+
+namespace 实验
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("CultureInfo's properties are following: ");
+            for (int i = 0; i < 23; i++)
+            {
+                CultureInfo my = new CultureInfo(i, false);
+                Console.WriteLine("ISOLanguge Name is : " + my.ThreeLetterISOLanguageName);
+                Console.WriteLine("Display Name is : " + my.DisplayName);
+                Console.WriteLine("CompareInfo is : " + my.CompareInfo);
+                Console.WriteLine("TextInfo is : " + my.TextInfo);
+                Console.WriteLine();
+            }
+        }
+    }
+}
