@@ -1,0 +1,21 @@
+using System;
+using System.Globalization;
+
+namespace 实验
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string myStr1 = "calle";
+            string myStr2 = "calor";
+            CompareInfo myCompInt1 = CompareInfo.GetCompareInfo("es-ES");
+            CompareInfo myCompInt2 = CompareInfo.GetCompareInfo(0x040A);
+            CompareInfo myCompInva = CultureInfo.InvariantCulture.CompareInfo;
+            Console.WriteLine("Comparing \"{0}\" and \"{1}\"", myStr1, myStr2);
+            Console.WriteLine("With myCompInt1.Compare:{0}", myCompInt1.Compare(myStr1, myStr2));
+            Console.WriteLine("With myCompInt2.Compare:{0}", myCompInt2.Compare(myStr1, myStr2));
+            Console.WriteLine("With myCompInva.Compare:{0}", myCompInva.Compare(myStr1, myStr2));
+        }
+    }
+}
