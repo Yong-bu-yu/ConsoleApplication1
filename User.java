@@ -4,6 +4,7 @@ import java.util.*;
 import javax.swing.*;
 public class demo4 
 {
+	//模拟登录系统
 	public static void main(String[] args) 
 	{
 		Form1 form=new Form1();
