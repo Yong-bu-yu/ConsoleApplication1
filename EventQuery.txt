@@ -1,0 +1,35 @@
+class Sample_EventQuery
+{
+  public static int Main(string[] args)
+  {
+    //创建一个ManagementClass实例
+    MannagementClass newClass = new ManagementClass("root\\default", String.Empty, null);
+    newClass["_Class"] = "TextWql";
+    newClass.Put();
+    //利用SQL语句，创建一个事件查询对象实例
+    EventQuery eventQuery = new EventQuery("select * from _classdeletionevent");
+    ManagementEventWatcher watcher = new ManagementEventWatcher(new ManagementScope("root/default"),eventQuery);
+    MyHandler handler = new MyHandler();
+    watcher.EventArrived += new EventArrivedEventHandler(hadler.Arrived);
+    watcher.Start();
+    newClass.Delete();
+    while(!handler.ISArrived) {System.Therading.Thread.Sleep(1000);}
+    watcher.Stop();
+    ManagementBaseObject eventArg = (ManagemntBaseObject)(handler.ReturnedArgs.NewEvent["TargetClass"]);
+    Console.WriteLine("Class Deleted = " + eventArg["_CLASS"]);
+    return 0;
+  }
+  public class MyHandler
+  {
+    private bool isArrived =false;
+    private EventArrivedEventArgs args;
+    public void Arrived(object sender, EventArrivedEventArgs e)
+    {
+      args = e;
+      Console.WriteLine(" {0} is Arrived!",e);
+      isArrived = true;
+    }
+    public EventArrivedEventArgs ReturnedArgs { get { return args; } }
+    public bool IsArrived { get {return isArrived; } }
+  }
+}
