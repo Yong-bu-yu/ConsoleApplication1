@@ -1,0 +1,12 @@
+
+        protected void ChangeCDHandler(object sender,EventArrivedEventArgs e)
+        {
+            string rslt = "";
+            //获取光驱的盘符
+            string drive = ((ManagementBaseObject)(e.NewEvent["TargetInstance"]))["Drive"].ToString();
+            //获取光驱的介质的类型
+            string MediaType = ((ManagementBaseObject)(e.NewEvent["TargetInstance"]))["MediaType"].ToString();
+            string VolumeName = ((ManagementBaseObject)(e.NewEvent["TargetInstance"]))["VolumeName"].ToString();
+            rslt = string.Format("Drive {0} changed media. Drive is type {1}.VolumeName is {2}", drive, MediaType, VolumeName);
+            richTextBox.AppendText(rslt + "\n");
+        }
