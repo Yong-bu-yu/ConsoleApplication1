@@ -1,0 +1,22 @@
+        static void Main(string[] args)
+        {
+
+            ConnectionOptions options = new ConnectionOptions();
+            options.Username = "user1";
+            options.Password = "111111";
+            //创建一个管理域对象
+            ManagementScope scope = new ManagementScope("\\\\yhw\\root\\cimv2", options);
+            try
+            {
+                scope.Connect();
+                ManagementObject disk = new ManagementObject(scope, new ManagementPath("Win32_logicaldisk='c:"), null);
+                disk.Get();
+                Console.WriteLine("Logical Disk Size = " + disk["Size"] + " bytes");
+                Console.WriteLine("ClassPath is : " + disk.ClassPath);
+                Console.WriteLine("UserName is : " + options.Username);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failed to connect: " + e.Message);
+            }
+        }
