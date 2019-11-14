@@ -1,0 +1,36 @@
+    class ManagementClass
+    {
+        static void Main(string[] args)
+        {
+            ManagementClass c = new ManagementClass("Win32_Share");
+            MyHandler h = new MyHandler();
+            ManagementOperationObserver ob = new ManagementOperationObserver();
+            //引发ObjectReadyEventHandler事件
+            ob.ObjectReady += new ObjectReadyEventHandler(h.NewObject);
+            ob.Completed += new CompletedEventHandler(h.Done);
+            c.GetInstances(ob);
+            //当h线程没有完成情况下，线程睡眠
+            while (!h.Completed)
+                System.Threading.Thread.Sleep(1000);
+            foreach (ManagementObject o in c.GetInstances())
+                Console.WriteLine("Next instance of Win32_Process : {0} ", o.Path);
+        }
+    }
+    
+    public class MyHandler
+    {
+        private bool completed = false;
+        public void NewObject(object sender, ObjectReadyEventArgs e)
+        {
+            Console.WriteLine("New result arrived ! {0}", ((ManagementObject)(e.NewObject))["Name"]);
+        }
+        public void Done(object sender, CompletedEventArgs e)
+        {
+            Console.WriteLine("async Get completed !");
+            completed = true;
+        }
+        public bool Completed
+        {
+            get { return completed; }
+        }
+    }
