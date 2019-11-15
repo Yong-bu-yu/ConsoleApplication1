@@ -1,0 +1,13 @@
+class Sample_WqlObjectQuery
+{
+  public static int Main(string[] args)
+  {
+    WqlObjectQuery objectQuery = new WqlObjectQuery("select * from Win32_Share");
+    ManagementObjectSearcher searcher = new ManagementObjectSearcher(objectQuery);
+    foreach (ManagementObject share in searcher.Get())
+    {
+      Console.WriteLine("Share = " + share["Name"]);
+    }
+    return 0;
+  }
+}
