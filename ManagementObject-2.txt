@@ -1,0 +1,10 @@
+    class ManagementObject
+    {
+        static void Main(string[] args)
+        {
+            ManagementObject disk = new ManagementObject("win32_logicldisk.deviceid=\"c:\"");
+            disk.Get();
+            Console.WriteLine("Logical Disk FreeSpace " + disk["FreeSpace"] + "bytes");
+            Console.WriteLine("Logical Disk Size = " + disk["Size"] + " bytes");
+        }
+    }
