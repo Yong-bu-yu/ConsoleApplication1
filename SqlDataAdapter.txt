@@ -1,0 +1,27 @@
+        public static void CreateSqlDataAdapter()
+        {
+            SqlConnection nwindConn = new SqlConnection("Data Sourec=localhost;Integrated Security=SSPI;Initial Catalog=northwind");
+            SqlDataAdapter custDA = new SqlDataAdapter("Select CustomerID, CompanyName FROM Customers", nwindConn);
+            custDA.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            custDA.InsertCommand = new SqlCommand("Insert INTO Customers (CustomerID, CompanyName) VALUES (@CustomerID, @CompanyName)", nwindConn);
+            custDA.UpdateCommand = new SqlCommand("Update Customers SET CustomerID = @CustomerID, CompanyName = @CompanyName WHERE CustomerID = @oldCustomerID", nwindConn);
+            custDA.DeleteCommand = new SqlCommand("Delete FROM Customers WHERE CustomerID = @CustomerID)", nwindConn);
+            custDA.InsertCommand.Parameters.Add("@CustomerID", SqlDbType.Char, 5, "CustomerID");
+            ...
+        }
+        public void DispRow()
+        {
+            string myConnectionString = "server=(local);user id=sa;password=111111;initial catalog= northwind";
+            SqlConnection myConnection = new SqlConnection(myConnectionString);
+            string myQuery = "Select CustomerID, CompanyName FROM Customers";
+            SqlCommand myCommand=new SqlCommand(myQuery,myConnection);
+            myConnection.Open();
+            SqlDataReader myDataReader = myCommand.ExecuteReader();
+            while (myDataReader.Read())
+            {
+                Console.WriteLine(myDataReader.GetSqlString(0) + ", ");
+                Console.WriteLine(myDataReader.GetSqlString(1) + ", ");
+                Console.WriteLine();
+            }
+            myCommand.Connection.Close();
+        }
