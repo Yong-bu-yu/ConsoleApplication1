@@ -1,0 +1,30 @@
+
+        public static void RunSqlTransation(string myConnString)
+        {
+            SqlConnection myConnection = new SqlConnection(myConnString);
+            myConnection.Open();
+            SqlCommand myCommand = new SqlCommand();
+            SqlTransaction myTrans = myConnection.BeginTransaction();
+            myCommand.Connection = myConnection;
+            myCommand.Transaction = myTrans;
+            try
+            {
+                myCommand.CommandText = "Insert into Region (RegionID, RegionDescription) VALUES (100, 'Description')";
+                myCommand.ExecuteNonQuery();
+                myCommand.CommandText = "Insert into Region (RegionID, RegionDescription) VALUES (101, 'Description')";
+                myCommand.ExecuteNonQuery();
+                myTrans.Commit();
+                Console.WriteLine("Both records are written to database.");
+            }
+            catch (Exception e)
+            {
+                myTrans.Rollback();
+                Console.WriteLine("Error: {0}", e.Message);
+                Console.WriteLine("Error repoted by {0}.", e.Source);
+                Console.WriteLine("Neither record was written to database.");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
