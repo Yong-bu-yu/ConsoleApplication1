@@ -1,0 +1,18 @@
+        public static void DispRow(string myConnectionString)
+        {
+            SqlConnection myConnection = new SqlConnection(myConnectionString);
+            string myQuery = "Select OrderID, CustomerID, OrderDate, Freight, ShipName FROM Orders";
+            SqlCommand myCommand = new SqlCommand(myQuery, myConnection);
+            myConnection.Open();
+            SqlDataReader myDataReader = myCommand.ExecuteReader();
+            while (myDataReader.Read())
+            {
+                Console.WriteLine(myDataReader.GetSqlInt32(0) + ", ");
+                Console.WriteLine(myDataReader.GetSqlString(1) + ", ");
+                Console.WriteLine(myDataReader.GetSqlDateTime(2) + ", ");
+                Console.WriteLine(myDataReader.GetSqlMoney(3) + ", ");
+                Console.WriteLine(myDataReader.GetSqlString(4));
+                Console.WriteLine();
+            }
+            myCommand.Connection.Close();
+        }
