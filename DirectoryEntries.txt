@@ -1,0 +1,23 @@
+public static void Main(String[] args)
+{
+  try
+  {
+    DirectoryEntry myEntry1;
+    DirectoryEntry myEntry2;
+    DirectoryEntry myEntry3;
+    DirectoryEntry myEntry4;
+    String strPath = "IIS://localhost/W3SVC/2/Root";
+    DirectoryEntries myEntryies = myDE.Children;
+    myEntry1 = myEntryies.Add("Sample Entry",myDE.SchemaClassName);
+    myEntry2 = myEntryies.Add("Sample Entries",myDE.SchemaClassName);
+    myEntry1.CommitChanges();
+    myEntry2.CommitChanges();
+    myEntry3 = myEntries.Find("Sample Entry",myDE.SchemaClassName);
+    myEntry4 = myEntries.Find("Sample Entries",myDE.SchemaClassName);
+    Console.WriteLine(myEntry3.Name + " is found in container.\n" + myEntry4.Name + " is found in container.");
+  }
+  catch(Exception e)
+  {
+    Console.WriteLine("The following exception was raised : {0}",e.Message);
+  }
+}
