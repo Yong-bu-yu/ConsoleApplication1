@@ -1,0 +1,37 @@
+public static void Main(String[] args)
+{
+  string myLDAPPath = "";
+  try
+  {
+    Console.WriteLine("Enter the path (Ex : 'LDAP://MyServer')");
+    myLDAPPath = Console.ReadLine();
+    DirectoryEntry mySearchRoot = new DirectoryEntry(myLDAPPath);
+    DirectorySearcher myDirectorySearcher = new DirectorySearcher(mySerachRoot);
+    SearchResult mySearchResult = myDirectorySearcher.FindOne();
+    if(mySearchResult != null)
+    {
+      DirectoryEntry myDirectoryEntry = mySearchResult.GetDirectoryEntry();
+      Console.WriteLine("\nThe name of the 'myDirectoryEntry' directory entry that corresponds to the mySearchResult' search result is : {0}\n",myDirectoryEntry.Name);
+      Console.WriteLine("The path for the 'mySearchResultPath' search result is : {0}\n",mySearchResultPath);
+      ResultPropertyCollection myResultPropColl = mySearchResult.Properties;
+      Console.WriteLne("The properties of the 'mySearchResult' are :");
+      foreach(string myKey in myResultPropColl.PropertyNames)
+      {
+        string tab = "  ";
+        Console.WriteLine(myKey + "=");
+        foreach(Object myCollection in myResultPropColl[myKey])
+        {
+          Console.WriteLine(tab + myCollection);
+        }
+      }
+    }
+    else
+    {
+      Console.WriteLine("The '" + myLDAPPath + "' path not found.");
+    }
+    catch(Exception e)
+    {
+      Console.WriteLine("The '" + myLDAPPath + "' path not found.");
+      Console.WriteLine("Exception : "+ e.Message);      
+    }
+}
