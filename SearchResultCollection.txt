@@ -1,0 +1,63 @@
+string strLDAP = "LDAP://pardesiservices.com";
+m_obDirEntry = new DirectoryEntry(strLDAP);
+public XmlDocument GetUserSchema(string strLogin)
+{
+  XmlDocument userDataDoc = null;
+  //确定我们有一个指定的一个根定的一个根节点
+  if (m_strRoot == null || m_strRoot.Length == 0)
+  {
+    m_strErrors += "Root Node not initialiizes";
+    return userDataDoc;
+  }
+  //创建一个SearchresultCollection对象
+  SearchResultCollection results;
+  DirectorySearcher srch = new DirectorySearcher(m_obDirEntry);
+  //定义一个过滤字符串
+  srch.Filter = ("(cn=" +StrLogin + ")");
+  //搜索全体目录节点，查找所有存在的结果
+  try
+  {
+    results = srch.FindAll();
+    //捕捉错误信息
+    catch(NotSupporteException ex)
+    {
+      m_strErrors += ex.Message;
+      //将出错信息入栈
+      Trace.WriteLine(ex.Message);
+    }
+    catch(Exception ex)
+    {
+      m_strErrors += "\n";
+      m_strErrors += ex.Message;
+      Trace.WriteLine(ex.Message);
+      return null;
+    }
+    try
+    {
+      //为所有找到的结果建立ADSIUser对象
+      foreach(SearchResult result in results)
+      {
+        ResultPropertyCollection coll = result.Properties;
+        ADSIUser user = new ADSIUser();
+        if(false == new ADSIUser();
+        if(false == user.Initialize(coll)
+        {
+          m_strErrors += "\n";
+          m_strErrors += "Failed to initialize the ADSI object";
+          Trace.WriteLine("Failed to initialize the ADSI object");
+          return null;
+        }
+        if(user.NumProperties > 0)
+        {
+          userDataDoc = user.GetUserProperties();
+        }
+      }
+      catch(Exception ex)
+      {
+        m_strErrors += "\n";
+        m_strErrors += ex.Message;
+        Trace.WriteLine(ex.Message);
+        return null;
+      }
+      return userDataDoc;
+}
