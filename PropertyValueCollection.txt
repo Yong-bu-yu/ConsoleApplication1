@@ -1,0 +1,20 @@
+private void tvObjects_AfterSelect(object sender, TreeViewEventArgs e)
+{
+  //获取目录树上的入口节点
+  DirectoryEntryNode node = (DirectoryEntryNode)e.Node;
+  DirectoryEntry entry = node.DirectoryEntry;
+  //清除节点的所有项目
+  lvProperties.Items.Clear();
+  //entry集合中所有name的入口名称都会被加入lvProperties的项目列表里
+  foreach(string name in entry.Properties.PropertyNames)
+  {
+    PropertyValueCollection values = entry.Properties[name];
+    foreach(object value in values)
+    {
+      string[] items = new string[2];
+      items[0] = name;
+      items[1] = value.ToString();
+      lvProperties.Items.Add(new ListViewItem(items));
+    }
+  }
+}
