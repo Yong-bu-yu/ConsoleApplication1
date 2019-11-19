@@ -1,0 +1,15 @@
+public static void Main(String[] args)
+{
+  try
+  {
+    DirectoryEntry entry = new DirectoryEntry("GC:");
+    IEnumerator ie = entry.Children.GetEnumerator();
+    ie.MoveNext();
+    entry = (DirectoryEntry)ie.Current;
+    DirectorySearcher search = new DirectorySearcher(entry);
+  }
+  catch(Exception e)
+  {
+    Console.WriteLine("The following exception was raised : {0}",e.Message);
+  }
+}
