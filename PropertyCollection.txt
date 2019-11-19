@@ -1,0 +1,12 @@
+private void AddPassWord()
+{
+  PropertyCollection p;
+  //创建一个新的数据表
+  DataTable dt = new DataTable("myNewTable");
+  //获取这个新数据表的PropertyCollectoin
+  p = dt.ExtendedProperties;
+  //向这个PropertyCollection加入一个口令
+  p.Add("myPassword", "yournum");
+  //输出这个口令
+  Response.Write(dt.ExtendedProperties["myPassword"]);
+}
