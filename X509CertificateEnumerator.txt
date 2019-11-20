@@ -1,0 +1,14 @@
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ChannelServices.RegisterChannel(new TcpChannel(8082));
+            ActivatedServiceTypeEntry myactivatedServiceTypeEntry = new ActivatedServiceTypeEntry(typeof(HelloServer));
+            RemotingConfiguration.RegisterActivatedServiceType(myactivatedServiceTypeEntry);
+            ActivatedServiceTypeEntry[] myactivatedServiceTypeEntries = RemotingConfiguration.GetRegisteredActivatedServiceTypes();
+            Console.WriteLine("Information of first registered activated service type :");
+            Console.WriteLine("Description: " + myactivatedServiceTypeEntries[0].ToString());
+            Console.WriteLine("Press enter to stop this process");
+            Console.WriteLine();
+        }
+    }
