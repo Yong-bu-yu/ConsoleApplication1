@@ -1,0 +1,24 @@
+
+            //创建一个SecurityToken对象
+            SecurityToken signingToken;
+            //创建一个X.509证书存储对象
+            X509CertificateStore store = X509CertificateStore.CurrentUserStore(X509CertificateStore.Mystore);
+            store.OpenRead();
+            //定义一个密钥keyed，并把它进行编码
+            byte[] keyed = Convert.FromBase64String("PTBv8366Lp0xwHT5nQY13dhxcMQ=");
+            //在X.509证书存储对象中查找keyid
+            X509CertificateCollection certs = store.FindCertificateByKeyIdentifier(keyed);
+            //把得到的第一个元素作为signingToken
+            signingToken = new X509SecurityToken(((X509Certificate)certs[0]));
+            //创建签发证书的代理对象
+            string stsAddr = "http://localhost/TokenIssuer/secureConversation.ashx";
+            SecurityTokenServiceClient stsProxy;
+            //创建一个签发代理
+            stsProxy = new SecurityTokenServiceClient(new Uri(stsAddr));
+            //把签发用户提交的证书请求加入代理队列中
+            stsProxy.RequestSoapContext.Security.Tokens.Add(signingToken);
+            stsProxy.RequestSoapContext.Security.Tokens.Elements.Add(new Signature(signingToken));
+            //创建一个用户请求信息
+            RequestSecurityToken res = new RequestSecurityToken(WSTrust.TokenTypes.SecurityContextToken);
+            //获取证书请求对象
+            RequestSecurityTokenResponse response = stsProxy.RequestSecurityToken(rst);
