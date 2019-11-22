@@ -1,0 +1,15 @@
+        public static DataSet SelectOdbcSrvRows(string myConnection,string mySelectQuery,string myTableName)
+        {
+            OdbcConnection myConn = new OdbcConnection(myConnection);
+            OdbcDataAdapter myDataAdapter = new OdbcDataAdapter();
+            myDataAdapter.SelectCommand = new OdbcCommand(mySelectQuery, myConn);
+            OdbcCommandBuilder cb = new OdbcCommandBuilder(myDataAdapter);
+            myConn.Open();
+            DataSet ds = new DataSet();
+            myDataAdapter.Fill(ds, myTableName);
+            //code to modify data in DataSet here
+            //Without the OdbcCommandBuilder this line would fail
+            myDataAdapter.Update(ds, myTableName);
+            myConn.Close();
+            return ds;
+        }
