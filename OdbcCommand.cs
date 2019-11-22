@@ -1,14 +1,7 @@
-using System;
-using System.Data.Odbc;
-
-namespace 实验
+public void ReadMyData(string myConnString)
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
             string mySelectQuery = "Select OrderID,CustomerID FROM Orders";
-            OdbcConnection myConnection = new OdbcConnection(mySelectQuery);
+            OdbcConnection myConnection = new OdbcConnection(myConnString);
             OdbcCommand myCommand = new OdbcCommand(mySelectQuery, myConnection);
             myConnection.Open();
             OdbcDataReader myReader = myCommand.ExecuteReader();
@@ -24,6 +17,4 @@ namespace 实验
                 //always call Close when down with connection.
                 myConnection.Close();
             }
-        }
-    }
 }
