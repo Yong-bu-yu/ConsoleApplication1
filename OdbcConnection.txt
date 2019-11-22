@@ -1,0 +1,15 @@
+        public void InsertRow(string myConnection)
+        {
+            //如果连接字符串为空，则用默认的字符串
+            if (myConnection=="")
+            {
+                myConnection = "DRIVER={SQL Server};SERVER=MyServer;Trusted_connection=yes;DATABASE=northwind;";
+            }
+            OdbcConnection myConn = new OdbcConnection(myConnection);
+            string myInsertQuery = "Insert INTO Customers (CustomerID, CompanyName) Values('NWIND', 'Northwind Traders')";
+            OdbcCommand myOdbcCommand = new OdbcCommand(myInsertQuery);
+            myOdbcCommand.Connection = myConn;
+            myConn.Open();
+            myOdbcCommand.ExecuteNonQuery();
+            myOdbcCommand.Connection.Close();
+        }
