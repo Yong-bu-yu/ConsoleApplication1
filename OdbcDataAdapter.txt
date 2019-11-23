@@ -1,0 +1,23 @@
+        public DataSet SelectOdbcSrvRows(DataSet dataset,string connection,string query)
+        {
+            OdbcConnection conn = new OdbcConnection();
+            OdbcDataAdapter adapter = new OdbcDataAdapter();
+            adapter.SelectCommand = new OdbcCommand(query, conn);
+            adapter.Fill(dataset);
+            return dataset;
+        }
+        public static OdbcDataAdapter CreateCustomerAdapter(OdbcConnection conn)
+        {
+            OdbcDataAdapter da = new OdbcDataAdapter();
+            OdbcCommand cmd;
+            //Create the SelectCommand.
+            cmd = new OdbcCommand("Select * FROM Customers WHERE Country = ? AND City = ?", conn);
+            cmd.Parameters.Add("@Country", OdbcType.NVarChar, 15);
+            cmd.Parameters.Add("@City", OdbcType.NVarChar, 15);
+            da.SelectCommand = cmd;
+            //Create the InsertCommand.
+            cmd = new OdbcCommand("Insert INTO Customers (CustomerID, CompanyName) VALUES (?, ?)", conn);
+            cmd.Parameters.Add("@CustomerID", OdbcType.NChar, 5, "CustomerID");
+            cmd.Parameters.Add("@CompanyName", OdbcType.NVarChar, 40, "CompanyName");
+            return da;
+        }
