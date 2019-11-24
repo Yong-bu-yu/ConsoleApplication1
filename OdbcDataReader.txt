@@ -1,0 +1,18 @@
+        public void ReadMyData(string myConnString)
+        {
+            //参数myConnstring是用户输入的打开数据库连接的语句
+            string mySelectQuery = "Select OrderID, CustomerID FROM Orders";
+            //建立数据库连接对象
+            OdbcConnection myConnection = new OdbcConnection(myConnString);
+            //建立一个执行SQL语句进行数据库查询操作的命令对象
+            OdbcCommand myCommand = new OdbcCommand(mySelectQuery, myConnection);
+            //打开数据库连接
+            myConnection.Open();
+            OdbcDataReader myReader = myCommand.ExecuteReader();
+            //在while循环中读出数据内容
+            while (myReader.Read())
+                Console.WriteLine(myReader.GetInt32(0) + ", " + myReader.GetString(1));
+            //关闭数据库读取对象
+            myReader.Close();//关闭数据库连接
+            myConnection.Close();
+        }
