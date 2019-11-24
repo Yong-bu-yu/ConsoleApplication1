@@ -1,0 +1,48 @@
+
+        public void RunOdbcTransaction(string myConnString)
+        {
+            //参数myConnString用来存放用户输入的SQL语句
+            OdbcConnection myConnection = new OdbcConnection(myConnString);
+            //打开数据库连接
+            myConnection.Open();
+            //创建一个OdbcCommand对象
+            OdbcCommand myCommand = myConnection.CreateCommand();
+            //创建一个Odbc事务
+            OdbcTransaction myTrans;
+            //把myTrans对象与myConnect对象相捆绑
+            myTrans = myConnection.BeginTransaction(IsolationLevel.ReadCommitted);
+            myCommand.Transaction = myTrans;
+            try
+            {
+                //向打开的数据库中插入两条记录
+                myCommand.CommandText = "Insert into Region (RegionID, RegionDescription) VALUES (100, 'Description')";
+                myCommand.ExecuteNonQuery();
+                myCommand.CommandText = "Insert into Region (RegionID, RegionDescription) VALUES (101, 'Descrtiption')";
+                //执行Odbc事务
+                myTrans.Commit();
+                Console.WriteLine("Both records are written to database.");
+            }
+            catch (Exception e)
+            {
+
+                try
+                {
+                    //执行事务回滚操作
+                    myTrans.Rollback();
+                }
+                catch (OdbcException ex)
+                {
+                    //判断回滚操作是否成功
+                    if (myTrans.Connection != null)
+                    {
+                        Console.WriteLine("An exception of type " + ex.GetType() + " was encounterd while attempting to roll back the transaction.");
+                    }
+                }
+                Console.WriteLine("An exception of type " + e.GetType() + "was encountered while insertion the data.");
+                Console.WriteLine("Neither record was written to database.");
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
