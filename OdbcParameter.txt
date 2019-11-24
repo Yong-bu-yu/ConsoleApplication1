@@ -1,0 +1,19 @@
+        //定义一个方法来创建OdbcParameter对象
+        public void CreateOdbcParameter()
+        {
+            //定义一个OdbcParameter对象，并赋值
+            OdbcParameter myParameter = new OdbcParameter("Description", OdbcType.VarChar, 11, ParameterDirection.Output, true, 0, 0, "Description", DataRowVersion.Current, "garde hose");
+            //输出OdbcParameter对象的ParameterName
+            Console.WriteLine(myParameter);//MessageBox.Show(myParameter.ToString());
+        }
+        //定义一个方法，创建一个OdbcParameter对象
+        public void CreateMyProc(OdbcConnection myConnection)
+        {
+            //参数myConnecton是用户打开数据库的连接对象
+            OdbcCommand myCommand = myConnection.CreateCommand();
+            myCommand.CommandText = "{ call MyProc(?,?,?) }";
+            //定义OdbcParameter对象的属性
+            myCommand.Parameters.Add("", OdbcType.Int).Value = 1;
+            myCommand.Parameters.Add("", OdbcType.Decimal).Value = 2;
+            myCommand.Parameters.Add("", OdbcType.Decimal).Value = 3;
+        }
