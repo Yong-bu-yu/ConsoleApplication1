@@ -73,7 +73,7 @@ namespace 实验
             Console.WriteLine(" RawValue\t=", s.RawValue);
             Console.WriteLine(" SystemFrequency =", s.SystemFrequency);
             Console.WriteLine(" TimeStamp\t=", s.TimeStamp);
-            Console.WriteLine(" TimeStamp100nSec =", s.TimeStamp100nSec);
+            Console.WriteLine(" TimeStamp100nSec =", s.TimeStamp100nSec);//
             Console.WriteLine("++++++++++++++++++++++++++++");
         }
     }
