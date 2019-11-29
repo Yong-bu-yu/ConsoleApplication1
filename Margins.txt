@@ -1,0 +1,27 @@
+public void Printing()
+{
+            try
+            {
+                streamToPrint = new StreamReader (filePath);
+                try
+                {
+                    printFont = new Font("Arial", 10);
+                    PrintDocument pd = new PrintDocument();
+                    //调用打印页面事件
+                    pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+                    pd.PrinterSettings.PrinterName = printer;
+                    //设置打印页面的边界
+                    Margins margins = new Margins(100, 100, 100, 100);
+                    pd.DefaultPageSettings.Margins = margins;
+                    pd.Print();
+                }
+                finally
+                {
+                    streamToPrint.Close();
+                }
+            }
+            catch(Exception er)
+            {
+                MessageBox.Show("An error occured printing the file - " + er.Message);
+            }
+}
