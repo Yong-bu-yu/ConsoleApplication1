@@ -1,0 +1,12 @@
+//把打印机的纸张来源的列表加载在组合框中
+public void ListPaperSource()
+{
+            comboPaperSource.DisplayMember = "SourceName";
+            PaperSource pkSource;
+            //在for循环中向组合框中加入纸张来源
+            for (int i = 0; i < printDoc.PrinterSettings.PaperSources.Count; i++)
+            {
+                pkSource = printDoc.PrinterSettings.PaperSources[i];
+                comboPaperSource.Items.Add(pkSource);
+            }
+}
