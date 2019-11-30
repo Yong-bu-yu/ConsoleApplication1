@@ -1,0 +1,11 @@
+        public void ListPrinterResolution()
+        {
+            PrinterResolution pkResolution;
+            //利用for结构把所有打印精确度加入组合框中
+            for (int i = 0; i < printDoc.PrinterSettings.PrinterResolutions.Count; i++)
+            {
+                //获取打印文档的打印精确度
+                pkResolution = printDoc.PrinterSettings.PrinterResolutions[i];
+                comboPrintResolution.Items.Add(pkResolution);
+            }
+        }
