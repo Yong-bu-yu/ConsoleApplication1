@@ -1,0 +1,50 @@
+
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //以读出的方式打开一个文本文件流                
+                streamToPrint = new StreamReader(@"C:\My Documents\MyFile.txt");
+                try
+                {
+                    printFont = new Font("Arial", 10);
+                    PrintDocument pd = new PrintDocument();
+                    //加载打印事件
+                    pd.PrintPage +=new PrintPageEventHandler(this.pd_PrintPage);
+                    pd.Print();
+                }
+                //最后关闭输出流
+                finally
+                {
+                    streamToPrint.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            //设置页面的各种属性
+            float linesPerPage = 0;
+            float yPos = 0;
+            int count = 0;
+            float leftMargin = e.MarginBounds.Left;
+            float topMargin = e.MarginBounds.Top;
+            string line = null;
+            //计算每页要打印的行数
+            linesPerPage = e.MarginBounds.Height / printFont.GetHeight(e.Graphics);
+            //在while循环中输出文本文件的内容
+            while (count<linesPerPage&&((line=streamToPrint.ReadLine())!=null))
+            {
+                yPos = topMargin + (count * printFont.GetHeight(e.Graphics));
+                e.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+                count++;
+            }
+            if (line != null)
+                e.HasMorePages = true;
+            else
+                e.HasMorePages = false;
+        }
