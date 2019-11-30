@@ -1,0 +1,24 @@
+
+
+        private void Button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //假定已经有了缺省打印机
+                PrintDocument pd = new PrintDocument();
+                pd.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
+                pd.Print();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("An error occurred while printing", ex.ToString());
+            }
+        }
+
+        //定义开始触发打印事件时所执行的程序
+        private void pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            //打印指定路径的bmp图片
+            e.Graphics.DrawImage(Image.FromFile(@"C:\MyFolder\MyFile.bmp"),e.Graphics.VisibleClipBounds);
+            e.HasMorePages = false;
+        }
