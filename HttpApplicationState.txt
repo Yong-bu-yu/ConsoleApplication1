@@ -1,0 +1,20 @@
+        public void demo()
+        {
+            HttpApplicationState AppState2;
+            AppState2 = httpApplication.Application.Contents;
+            string[] StateVars = new string[AppState2.Count];
+            StateVars = AppState2.AllKeys;
+            int Loop1;
+            //把应用程序状态集合的对象名称存入数组
+            for (Loop1 = 0; Loop1 < httpApplication.Application.Count; Loop1++)
+            {
+                StateVars[Loop1] = httpApplication.Application.GetKey(Loop1);
+            }
+            //利用方法Add加入新的应用程序对象
+            httpApplication.Application.Add("MyAppVar1", MyObject1);
+            httpApplication.Application.Add("MyAppVar2", MyObject2);
+            for (Loop1 = 0; Loop1 < httpApplication.Application.Count; Loop1++)
+            {
+                StateVars[Loop1] = httpApplication.Application.GetKey(Loop1);
+            }
+        }
