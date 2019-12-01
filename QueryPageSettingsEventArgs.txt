@@ -1,0 +1,33 @@
+        private void MyButtonPrint_OnClick(object sender, EventArgs e)
+        {
+            //设置打印机的名称，如果无效，给用户提示
+            printDoc.PrinterSettings.PrinterName = "Microsoft Print to PDF";
+           // printDoc.QueryPageSettings += new QueryPageSettingsEventHandler(MyPrintQueryPageSettingsEvent);
+            if (printDoc.PrinterSettings.IsValid)
+            {
+                //如果打印机支持彩色打印，，则不设置成彩色打印
+                if (printDoc.PrinterSettings.SupportsColor)
+                {
+                    printDoc.DefaultPageSettings.Color = false;
+                }
+                //设置打印任务名称，页数，开始打印
+                printDoc.DocumentName = "My Presentation";
+                currentPageNumber = 1;
+                printDoc.Print();
+            }
+            else
+            {
+                MessageBox.Show("Printer is not valid");
+            }
+        }
+        private void MyPrintQueryPageSettingsEvent(object sender,QueryPageSettingsEventArgs e)
+        {
+            //检测打印机是否支持彩色彩色打印，支持就设置彩色打印
+            if (printDoc.PrinterSettings.SupportsColor)
+            {
+                if (currentPageNumber==1)
+                {
+                    e.PageSettings.Color = true;
+                }
+            }
+        }
