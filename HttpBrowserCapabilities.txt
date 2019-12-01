@@ -1,0 +1,21 @@
+public void HttpBrowserCapabilitiesDemo()
+{
+  HttpBrowserCapabilities bc = Request.BrowSer;
+  Resopnse.Write("<p>Browser Capabilities:</p>");
+  Resopnse.Write("Type = " + bc.Type + "<br>");
+  Resopnse.Write("Name = " + bc.Browser + "<br>");
+  Resopnse.Write("Version = " + bc.Version + "<br>");
+  Resopnse.Write("Platform = " + bc.Platform + "<br>");
+  Resopnse.Write("Is Crawler = " + bc.Crawler + "<br>");
+  Resopnse.Write("Is AOL = " + bc.AOL + "<br>");
+  Resopnse.Write("Is win16 = " + bc.Win16 + "<br>");
+  Resopnse.Write("Is win32 = " + bc.Win32 + "<br>");
+  Resopnse.Write("Supports Frames = " + bc.Frames + "<br>");
+  Resopnse.Write("Supports Tables = " + bc.Tables + "<br>");
+  Resopnse.Write("Supports Cookies = " + bc.Cookies + "<br>");
+  Resopnse.Write("Supports VB Script = " + bc.VBScript + "<br>");
+  Resopnse.Write("Supports JavaScript = " + bc.JavaScript + "<br>");
+  Resopnse.Write("Supports Java Applets = " + bc.JavaApplets + "<br>");
+  Resopnse.Write("Supports ActiveX Controls = " + bc.ActiveXControls + "<br>");
+  Resopnse.Write("CDF = " + bc.CDF + "<br>");
+}
