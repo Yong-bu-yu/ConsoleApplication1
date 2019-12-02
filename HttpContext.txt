@@ -1,0 +1,13 @@
+void Button_Click(Object sender,EventArgs e)
+{
+  //当用户单击按钮时输出信息
+  Response.Write("Data submitted to this page");
+}
+
+void Page_Load(Object sender,EventArgs e)
+{
+  //使用'Current'，创建一个'Httpcontext'对象
+  HttpContext myContext = HttpContext.Current;
+  //重写内部路径
+  myContext.RewritePath("HttpContext_Next.aspx");
+}
