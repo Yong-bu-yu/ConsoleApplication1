@@ -1,0 +1,43 @@
+<%@ Import Namepace="System.Data" %>
+<html>
+<script language="C#" runat="server">
+  void Page_Load(Object Src, EventArgs E)
+  {
+    //生成一个数据表
+    DataTable dt = new DataTable();
+    DataRow dr;
+    //加入数据行
+    dt.Columns.Add(new DataColumn("IntegerValue",typeof(Int32));
+    dt.Columns.Add(new DataColumn("StringValue",typeof(string));
+    dt.Columns.Add(new DataColumn("DateTimeValue",typeof(DateTime));
+    dt.Columns.Add(new DataColumn("BoolValue",typeof(bool));
+    dt.Columns.Add(new DataColumn("CurrencyValue",typeof(double));
+    //向数据表中添加数据
+    for (int i = 0; i < 9; i++)
+    {
+      dr = dt.NewRow();
+      dr[0] = i;
+      dr[1] = "项" + i.ToString();
+      dr[2] = DateTime.Now;
+      dr[3] = (i % 2 != 0) ? true : false;
+      dt.Rows.Add(dr);
+    }
+    //生成数据视图，并绑定在数据源上
+    MyRepeater.DataSource=new DataView(dt);
+    MyRepeater.DataBind();
+  }
+</script>
+<body>
+  <h3><font face="宋体">数据绑定 HtmlAnchor</font></h3> <p>
+  <form runat=server> <font face="宋体" size="-1">
+    <asp:Repeater id="MyRepeater" runat="server">
+      <ItemTemplate>
+        <a href='<%# "detailspage.aspx?id=" + HttpUtility.UrlEncode(DataBinder.Eval(Container,"DataItem.StringValue").ToString()) %>' runat="server">
+          <%# DataBinder.Eval(Container, "DataItem.StringValue") %>
+        </a>的链接<p>
+      </ItemTemplate>
+    </asp:Repeater>
+  </font>
+  </form>
+</body>
+</html>
