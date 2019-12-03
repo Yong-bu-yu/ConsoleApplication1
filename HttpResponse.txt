@@ -1,0 +1,16 @@
+public void write_file_to_http()
+{
+            FileStream MyFileStream;
+            long FileSize;
+            //利用类FileStream以读的方式打开文本文件
+            MyFileStream = new FileStream("Test.txt", FileMode.Open);
+            FileSize = MyFileStream.Length;
+            byte[] Buffer = new byte[(int)FileSize];
+            //把文件内容读入缓冲区
+            MyFileStream.Read(Buffer, 0, (int)FileSize);
+            MyFileStream.Close();
+            //将读出的内容输出到网页上
+            HttpResponse Response = new HttpResponse(writer);
+            Response.Write("<b>File Contents: </b>");
+            Response.BinaryWrite(Buffer);
+}
