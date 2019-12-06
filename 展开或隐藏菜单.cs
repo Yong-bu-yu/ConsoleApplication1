@@ -36,7 +36,18 @@ namespace WindowsFormsApplication2
             修改密码ToolStripMenuItem.Visible = false;
             忘记密码ToolStripMenuItem.Visible = false;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+            timer1.Start();
+            timer1.Tick += Timer1_Tick;
             base.OnLoad(e);
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+                statusStrip1.Items[1].Text = "日期：" + DateTime.Now;
+            else
+                statusStrip1.Items[1].Text = "";
+            toolStripProgressBar1.PerformStep();
         }
 
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
