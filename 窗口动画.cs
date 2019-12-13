@@ -1,21 +1,6 @@
 using System;
-using System.Web;
-using System.IO;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Reflection;
-using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication2
 {
@@ -36,6 +21,7 @@ namespace WindowsFormsApplication2
             button1.Click += Button1_Click;
             button2.Click += Button2_Click;
             timer1.Tick += Timer1_Tick;
+            EnableBlur();
             base.OnLoad(e);
         }
 
@@ -54,12 +40,62 @@ namespace WindowsFormsApplication2
         {
             FlashWindow(Handle, true);
         }
+            [DllImport("user32.dll")]
+            internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
 
+            [StructLayout(LayoutKind.Sequential)]
+            internal struct WindowCompositionAttributeData
+            {
+                public WindowCompositionAttribute Attribute;
+                public IntPtr Data;
+                public int SizeOfData;
+            }
+
+            internal enum WindowCompositionAttribute
+            {
+                WCA_ACCENT_POLICY = 19
+            }
+
+            internal enum AccentState
+            {
+                ACCENT_DISABLED = 0,
+                ACCENT_ENABLE_GRADIENT = 1,
+                ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
+                ACCENT_ENABLE_BLURBEHIND = 3,
+                ACCENT_INVALID_STATE = 4
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            internal struct AccentPolicy
+            {
+                public AccentState AccentState;
+                public int AccentFlags;
+                public int GradientColor;
+                public int AnimationId;
+            }
+
+            internal void EnableBlur()
+            {
+                var accent = new AccentPolicy();
+                var accentStructSize = Marshal.SizeOf(accent);
+                accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
+
+                var accentPtr = Marshal.AllocHGlobal(accentStructSize);
+                Marshal.StructureToPtr(accent, accentPtr, false);
+
+                var data = new WindowCompositionAttributeData();
+                data.Attribute = WindowCompositionAttribute.WCA_ACCENT_POLICY;
+                data.SizeOfData = accentStructSize;
+                data.Data = accentPtr;
+
+                SetWindowCompositionAttribute(this.Handle, ref data);
+
+                Marshal.FreeHGlobal(accentPtr);
+            }
         protected override void OnPaint(PaintEventArgs e)
         {
             TransparencyKey = BackColor;
-            e.Graphics.FillRectangle(Brushes.BlueViolet, ClientRectangle);
-            base.OnPaint(e);
+                base.OnPaint(e);
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
@@ -69,6 +105,7 @@ namespace WindowsFormsApplication2
         }
     }
 }
+
 
 //int AW_HOR_POSITIVE=0x00000001; 自左向右显示窗口。该标志可以在滚动动画和滑动动画中使用。当使用AW_CENTER标志时，该标志将被忽略
 //int AW_HOR_NEGATIVE=0x00000002; 自右向左显示窗口。当使用AW_CENTER标志时该标志被忽略
