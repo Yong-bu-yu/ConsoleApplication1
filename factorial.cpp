@@ -1,6 +1,7 @@
-﻿// factorial.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+// factorial.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
-
+// 阶乘：
+// 5的阶乘是 5*4*3*2*1；n的阶乘是 n*(n-1)*(n-2)*...*1。
 #include <iostream>
 using namespace std;
 //递归算阶乘
